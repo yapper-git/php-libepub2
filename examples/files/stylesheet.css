@@ -1,0 +1,9 @@
+h1 {
+    color: gray;
+    border-bottom: 1px solid gray;
+}
+
+p:first-letter {
+    font-size: 1.8em;
+    float: left;
+}
