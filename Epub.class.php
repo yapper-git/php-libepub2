@@ -9,9 +9,6 @@ require_once __DIR__.'/EpubToc.class.php';
 class Epub
 {
     const XML_ENCODING  = 'utf-8';
-    const TEXTS_FOLDER  = 'texts/';
-    const STYLES_FOLDER = 'styles/';
-    const IMAGES_FOLDER = 'images/';
 
     protected $tab;
     protected $endLine;
@@ -239,56 +236,24 @@ class Epub
 
     public function addStyleFromFile($localname, $filename, $id)
     {
-        $this->addFileFromFile(
-            self::STYLES_FOLDER.$localname,
-            $filename,
-            $id,
-            'text/css'
-        );
+        $this->addFileFromFile($localname, $filename, $id, 'text/css');
     }
 
     public function addStyleFromString($localname, $content, $id)
     {
-        $this->addFileFromString(
-            self::STYLES_FOLDER.$localname,
-            $content,
-            $id,
-            'text/css'
-        );
+        $this->addFileFromString($localname, $content, $id, 'text/css');
     }
 
     public function addTextFromFile($localname, $filename, $id)
     {
-        $this->addFileFromFile(
-            self::TEXTS_FOLDER.$localname,
-            $filename,
-            $id,
-            'application/xhtml+xml'
-        );
-
+        $this->addFileFromFile($localname, $filename, $id, 'application/xhtml+xml');
         $this->spine->append($id);
     }
 
     public function addTextFromString($localname, $content, $id)
     {
-        $this->addFileFromString(
-            self::TEXTS_FOLDER.$localname,
-            $content,
-            $id,
-            'application/xhtml+xml'
-        );
-
+        $this->addFileFromString($localname, $content, $id, 'application/xhtml+xml');
         $this->spine->append($id);
-    }
-
-    public function addImage($localname, $filename, $id, $mediaType = 'image/png')
-    {
-        $this->addFileFromFile(
-            self::IMAGES_FOLDER.$localname,
-            $filename,
-            $id,
-            $mediaType
-        );
     }
 
     public function valid()
@@ -562,7 +527,7 @@ class Epub
             $buffer .= str_repeat($this->tab, $level+1).'<reference'
                     .' type="'.$reference->type().'"'
                     .' title="'.$reference->title().'"'
-                    .' href="'.self::TEXTS_FOLDER.$reference->href().'"'
+                    .' href="'.$reference->href().'"'
                     .'/>'.$this->endLine;
         }
 
@@ -605,9 +570,7 @@ class Epub
         $buffer .= $this->tab.'</head>'.$this->endLine;
 
         // <docTitle>...</docTitle> (required according to epubcheck)
-        $buffer .= $this->tab.'<docTitle>'.$this->endLine;
-        $buffer .= $this->tab.$this->tab.'<text>'.$this->title.'</text>'.$this->endLine;
-        $buffer .= $this->tab.'</docTitle>'.$this->endLine;
+        $buffer .= $this->tab.'<docTitle><text>'.$this->title.'</text></docTitle>'.$this->endLine;
 
         // <navMap>...</navMap>
         $buffer .= $this->tab.'<navMap>'.$this->endLine;
@@ -633,12 +596,10 @@ class Epub
         $buffer .= str_repeat($this->tab, $level).'<navPoint id="'.$navPoint->id().'" playOrder="'.$playOrder.'">'.$this->endLine;
 
         // <navLabel><text></text></navLabel>
-        $buffer .= str_repeat($this->tab, $level+1).'<navLabel>'.$this->endLine;
-        $buffer .= str_repeat($this->tab, $level+2).'<text>'.$navPoint->label().'</text>'.$this->endLine;
-        $buffer .= str_repeat($this->tab, $level+1).'</navLabel>'.$this->endLine;
+        $buffer .= str_repeat($this->tab, $level+1).'<navLabel><text>'.$navPoint->label().'</text></navLabel>'.$this->endLine;
 
         // <content/>
-        $buffer .= str_repeat($this->tab, $level+1).'<content src="'.self::TEXTS_FOLDER.$navPoint->source().'"/>'.$this->endLine;
+        $buffer .= str_repeat($this->tab, $level+1).'<content src="'.$navPoint->source().'"/>'.$this->endLine;
 
         // <navPoint>...</navPoint> if children
         foreach ($navPoint->navPoints() as $subNavPoint) {

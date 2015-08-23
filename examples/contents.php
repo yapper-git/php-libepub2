@@ -14,17 +14,17 @@ $epub->metadata()->addLanguage('en');
 $navPoint1 = new EpubNavPoint(array(
     'id'     => 'toc.1',
     'label'  => '1. Chapter 1',
-    'source' => 'text.xhtml#toc.1'
+    'source' => 'text.html#toc.1'
 ));
 $navPoint2 = new EpubNavPoint(array(
     'id'     => 'toc.2',
     'label'  => '2. Chapter 2',
-    'source' => 'text.xhtml#toc.2'
+    'source' => 'text.html#toc.2'
 ));
 $navPoint3 = new EpubNavPoint(array(
     'id'     => 'toc.3',
     'label'  => '3. Chapter 3',
-    'source' => 'text.xhtml#toc.3'
+    'source' => 'text.html#toc.3'
 ));
 $epub->toc()->append($navPoint1);
 $epub->toc()->append($navPoint2);
@@ -33,12 +33,12 @@ $epub->toc()->append($navPoint3);
 $navPoint1_1 = new EpubNavPoint(array(
     'id'     => 'toc.1.1',
     'label'  => '1.1. Section 1',
-    'source' => 'text.xhtml#toc.1.1'
+    'source' => 'text.html#toc.1.1'
 ));
 $navPoint1_2 = new EpubNavPoint(array(
     'id'     => 'toc.1.2',
     'label'  => '1.2. Section 2',
-    'source' => 'text.xhtml#toc.1.2'
+    'source' => 'text.html#toc.1.2'
 ));
 $navPoint1->append($navPoint1_1);
 $navPoint1->append($navPoint1_2);
@@ -46,29 +46,29 @@ $navPoint1->append($navPoint1_2);
 $navPoint2_1 = new EpubNavPoint([
     'id'        => 'toc.2.1',
     'label'     => '2.1. Section 1',
-    'source'    => 'text.xhtml#toc.2.1',
+    'source'    => 'text.html#toc.2.1',
     'navPoints' => [
         new EpubNavPoint([
             'id'        => 'toc.2.1.1',
             'label'     => '2.1.1. Subsection 1',
-            'source'    => 'text.xhtml#toc.2.1.1'
+            'source'    => 'text.html#toc.2.1.1'
         ]),
         new EpubNavPoint([
             'id'        => 'toc.2.1.2',
             'label'     => '2.1.2. Subsection 2',
-            'source'    => 'text.xhtml#toc.2.1.2'
+            'source'    => 'text.html#toc.2.1.2'
         ]),
         new EpubNavPoint([
             'id'        => 'toc.2.1.3',
             'label'     => '2.1.3. Subsection 3',
-            'source'    => 'text.xhtml#toc.2.1.3'
+            'source'    => 'text.html#toc.2.1.3'
         ])
     ]
 ]);
 $navPoint2_2 = new EpubNavPoint([
     'id'     => 'toc.2.2',
     'label'  => '2.2. Section 2',
-    'source' => 'text.xhtml#toc.2.2'
+    'source' => 'text.html#toc.2.2'
 ]);
 $navPoint2->append($navPoint2_1);
 $navPoint2->append($navPoint2_2);
@@ -96,7 +96,7 @@ $text = <<<EOF
 </html>
 EOF;
 
-$epub->addTextFromString('text.xhtml', $text, 'text');
+$epub->addTextFromString('text.html', $text, 'text');
 
 $epub->valid();
 $epub->save();

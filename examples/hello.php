@@ -11,12 +11,12 @@ $epub->metadata()->addIdentifier('helloworld');
 $epub->metadata()->addTitle('Hello world!');
 $epub->metadata()->addLanguage('en');
 
-$epub->addTextFromFile('hello.xhtml', 'files/hello.xhtml', 'hello');
+$epub->addTextFromFile('texts/hello.xhtml', 'files/hello.xhtml', 'hello');
 
 $epub->toc()->append(new EpubNavPoint(array(
     'id'     => 'hello',
     'label'  => 'Hello',
-    'source' => 'hello.xhtml'
+    'source' => 'texts/hello.xhtml'
 )));
 
 $epub->valid();

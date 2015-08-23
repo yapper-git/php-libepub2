@@ -43,33 +43,33 @@ $metadata->addMeta('name2', 'content2');
 $epub->guide()->append(new EpubGuideReference(array(
     'type'  => 'title-page',
     'title' => 'Title page',
-    'href'  => 'titlepage.xhtml'
+    'href'  => 'texts/titlepage.xhtml'
 )));
 $epub->guide()->append(new EpubGuideReference(array(
     'type'  => 'toc',
     'title' => 'Table of Contents',
-    'href'  => 'contents.xhtml'
+    'href'  => 'texts/contents.xhtml'
 )));
 
 $navPoint1 = new EpubNavPoint(array(
     'id'     => 'chap1',
     'label'  => 'Chapter 1',
-    'source' => 'chapter1.xhtml'
+    'source' => 'texts/chapter1.xhtml'
 ));
 $navPoint2 = new EpubNavPoint(array(
     'id'     => 'chap2',
     'label'  => 'Chapter 2',
-    'source' => 'chapter2.xhtml'
+    'source' => 'texts/chapter2.xhtml'
 ));
 $epub->toc()->append($navPoint1);
 $epub->toc()->append($navPoint2);
 
-$epub->addTextFromFile('titlepage.xhtml', 'files/title_page.xhtml', 'titlepage');
-$epub->addTextFromFile('contents.xhtml', 'files/contents.xhtml', 'contents');
-$epub->addTextFromFile('chapter1.xhtml', 'files/chap1.xhtml', 'chap1');
-$epub->addTextFromFile('chapter2.xhtml', 'files/chap2.xhtml', 'chap2');
-$epub->addStyleFromFile('stylesheet.css', 'files/stylesheet.css', 'style');
-$epub->addImage('logo.png', 'files/logo.png', 'logo');
+$epub->addTextFromFile('texts/titlepage.xhtml', 'files/title_page.xhtml', 'titlepage');
+$epub->addTextFromFile('texts/contents.xhtml', 'files/contents.xhtml', 'contents');
+$epub->addTextFromFile('texts/chapter1.xhtml', 'files/chap1.xhtml', 'chap1');
+$epub->addTextFromFile('texts/chapter2.xhtml', 'files/chap2.xhtml', 'chap2');
+$epub->addStyleFromFile('styles/stylesheet.css', 'files/stylesheet.css', 'style');
+$epub->addFileFromFile('images/logo.png', 'files/logo.png', 'logo', 'image/png');
 
 try {
     $epub->valid();
